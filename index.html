@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Media Year Equations</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    select,
+    input[type="text"] {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 5px;
+      font-size: 16px;
+      font-family: Arial;
+    }
+
+    .output {
+      border: 1px solid #ccc;
+      padding: 10px;
+      font-size: 16px;
+      font-family: Arial;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <label for="medium">Select a medium:</label>
+    <select id="medium">
+      <option>-select medium-</option>
+      <option value="A Christmas Story">A Christmas Story</option>
+      <option value="A Goofy Movie">A Goofy Movie</option>
+      <option value="E.T.: The Extraterrestrial">E.T.: The Extraterrestrial</option>
+      <option value="Kirby Super Star">Kirby Super Star</option>
+      <option value="Lady & The Tramp">Lady & The Tramp</option>
+      <option value="Lilo & Stitch">Lilo & Stitch</option>
+      <option value="Space Jam">Space Jam</option>
+      <option value="The Lion King">The Lion King</option>
+      <option value="Treasure Planet">Treasure Planet</option>
+      <option value="Who Framed Roger Rabbit?">Who Framed Roger Rabbit?</option>
+      <option value="Winnie-the-Pooh (book)">Winnie-the-Pooh (book)</option>
+    </select>
+
+    <label for="year">Select a year:</label>
+    <select id="year">
+      <option>-select year-</option>
+      <option value="1744">1744</option>
+      <option value="1861">1861</option>
+      <option value="1921">1921</option>
+      <option value="1922">1922</option>
+      <option value="2059">2059</option>
+      <option value="2079">2079</option>
+      <option value="2080">2080</option>
+      <option value="2139">2139</option>
+    </select>
+
+    <div class="output" id="output"></div>
+  </div>
+
+  <script>
+    const releaseYears = {
+      "Winnie-the-Pooh (book)": 1926,
+      "Lady & The Tramp": 1955,
+      "E.T.: The Extraterrestrial": 1982,
+      "A Christmas Story": 1983,
+      "Who Framed Roger Rabbit?": 1988,
+      "The Lion King": 1994,
+      "A Goofy Movie": 1995,
+      "Kirby Super Star": 1996,
+      "Space Jam": 1996,
+      "Lilo & Stitch": 2002,
+      "Treasure Planet": 2002
+    };
+
+    const mediumSelect = document.getElementById("medium");
+    const yearSelect = document.getElementById("year");
+    const outputDiv = document.getElementById("output");
+
+    function updateEquation() {
+      const medium = mediumSelect.value;
+      const selectedYear = parseInt(yearSelect.value);
+
+      if (!releaseYears[medium]) {
+        outputDiv.textContent = "Select a valid medium and year";
+        return;
+      }
+
+      const difference = selectedYear - releaseYears[medium];
+
+      let equation = "";
+      if (difference > 0) {
+        equation = `${selectedYear} - ${difference} years`;
+      } else if (difference < 0) {
+        equation = `${selectedYear} + ${Math.abs(difference)} years`;
+      } else {
+        equation = `${selectedYear}`;
+      }
+
+      // Use colon instead of hyphen
+      outputDiv.textContent = `${medium}: (${equation})`;
+    }
+
+    mediumSelect.addEventListener("change", updateEquation);
+    yearSelect.addEventListener("change", updateEquation);
+
+    updateEquation();
+  </script>
+</body>
+</html>
