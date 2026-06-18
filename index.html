@@ -267,9 +267,9 @@
       if (releaseYear > selectedYear) {
         outputDiv.textContent = `${selectedYear}: ${yearDifference} years before ${medium}`;
       } else if (releaseYear < selectedYear) {
-        outputDiv.textContent = `${selectedYear}: ${yearDifference} years of ${medium}`;
+        outputDiv.textContent = `${selectedYear}: ${yearDifference} years after ${medium}`;
       } else {
-        outputDiv.textContent = `${selectedYear}: the same year as ${medium}`;
+        outputDiv.textContent = `${selectedYear}: 0 years before ${medium}`;
       }
     }
 
