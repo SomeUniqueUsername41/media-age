@@ -41,7 +41,7 @@
   <div class="container">
     <label for="medium">Select a medium:</label>
     <select id="medium">
-      <option>-select medium-</option>
+      <option value="">-select medium-</option>
       <option value="A Christmas Carol (book)">A Christmas Carol (book)</option>
       <option value="A Christmas Story">A Christmas Story</option>
       <option value="A Goofy Movie">A Goofy Movie</option>
@@ -111,7 +111,7 @@
 
     <label for="year">Select a year:</label>
     <select id="year">
-      <option>-select year-</option>
+      <option value="">-select year-</option>
       <option value="1622">1622</option>
       <option value="1744">1744</option>
       <option value="1766">1766</option>
@@ -252,26 +252,15 @@
 
     function updateEquation() {
       const medium = mediumSelect.value;
-      const selectedYear = parseInt(yearSelect.value);
+      const selectedYear = parseInt(yearSelect.value, 10);
 
-      if (!releaseYears[medium]) {
+      if (!medium || Number.isNaN(selectedYear) || releaseYears[medium] === undefined) {
         outputDiv.textContent = "Select a valid medium and year";
         return;
       }
 
-      const difference = selectedYear - releaseYears[medium];
-
-      let equation = "";
-      if (difference > 0) {
-        equation = `${selectedYear} - ${difference} years`;
-      } else if (difference < 0) {
-        equation = `${selectedYear} + ${Math.abs(difference)} years`;
-      } else {
-        equation = `${selectedYear}`;
-      }
-
-      // Use colon instead of hyphen
-      outputDiv.textContent = `${medium}: (${equation})`;
+      const yearDifference = Math.abs(selectedYear - releaseYears[medium]);
+      outputDiv.textContent = `${selectedYear}: ${yearDifference} years of ${medium}`;
     }
 
     mediumSelect.addEventListener("change", updateEquation);
