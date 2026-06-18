@@ -261,8 +261,16 @@
         return;
       }
 
-      const yearDifference = Math.abs(selectedYear - releaseYears[medium]);
-      outputDiv.textContent = `${selectedYear}: ${yearDifference} years of ${medium}`;
+      const releaseYear = releaseYears[medium];
+      const yearDifference = Math.abs(selectedYear - releaseYear);
+
+      if (releaseYear > selectedYear) {
+        outputDiv.textContent = `${selectedYear}: ${yearDifference} years before ${medium}`;
+      } else if (releaseYear < selectedYear) {
+        outputDiv.textContent = `${selectedYear}: ${yearDifference} years of ${medium}`;
+      } else {
+        outputDiv.textContent = `${selectedYear}: the same year as ${medium}`;
+      }
     }
 
     mediumSelect.addEventListener("change", updateEquation);
